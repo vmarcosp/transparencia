@@ -1,4 +1,5 @@
 import { JSDOM } from 'jsdom'
+import fs from 'fs'
 import * as R from 'ramda'
 import { LEFT_COLUMN_SELECTOR, RIGHT_COLUMN_SELECTOR, TABLE_SELECTOR } from './selectors'
 import { innerHTML, querySelectorAll, querySelector } from '../utils'
@@ -51,16 +52,16 @@ export const getEmployeeData = async url => {
   const { window } = await JSDOM.fromURL(url)
   const { document } = window
 
-  // const $rowsFromLeft = document.querySelectorAll(LEFT_COLUMN_SELECTOR)
-  // const $rowsFromRight = document.querySelectorAll(RIGHT_COLUMN_SELECTOR)
-  const $table = getSalaryTable(document)
-
-  console.log($table)
+  const $rowsFromLeft = document.querySelectorAll(LEFT_COLUMN_SELECTOR)
+  const $rowsFromRight = document.querySelectorAll(RIGHT_COLUMN_SELECTOR)
+  // const $table = getSalaryTable(document)
 
   const employeeData = {
-    // ...getPrimaryInfo($rowsFromLeft),
-    // ...getPrimaryInfo($rowsFromRight)
+    ...getPrimaryInfo($rowsFromLeft),
+    ...getPrimaryInfo($rowsFromRight)
   }
+
+  console.log(employeeData)
 
   return employeeData
 }

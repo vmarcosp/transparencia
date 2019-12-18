@@ -26,7 +26,7 @@ export const executeCrawlerTest = async () => {
 
   const links = getEmployeeLinks(document)
   const data = await getEmployeeData(links[0])
-  console.table(data)
+
   console.log('------------FINISHED-------------')
 
 }
